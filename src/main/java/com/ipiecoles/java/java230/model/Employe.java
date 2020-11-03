@@ -3,12 +3,18 @@ package com.ipiecoles.java.java230.model;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "employe")
 public abstract class Employe {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column
 	private String nom;
 	
 	private String prenom;
