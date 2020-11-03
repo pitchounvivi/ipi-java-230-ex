@@ -1,5 +1,6 @@
 package com.ipiecoles.java.java230.model;
 
+import com.ipiecoles.java.java230.repository.EmployeRepository;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
