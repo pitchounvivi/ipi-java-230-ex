@@ -26,6 +26,8 @@ public class MyRunner implements CommandLineRunner {
             System.out.println("Employé est inexistant");
         } else {
             Employe e = employe.get();
+            e.setSalaire(e.getSalaire() + 200);
+            e = employeRepository.save(e);
             System.out.println(e.toString());
         }
 
