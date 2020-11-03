@@ -30,6 +30,11 @@ public class MyRunner implements CommandLineRunner {
         }
 
 
+        for (Employe emp : employeRepository.findAll()){
+            System.out.println(emp.toString());
+        }
+
+
     }
 
     public static void print(Object t) {
