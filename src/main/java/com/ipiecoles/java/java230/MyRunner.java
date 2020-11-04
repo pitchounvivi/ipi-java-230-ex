@@ -60,6 +60,10 @@ public class MyRunner implements CommandLineRunner {
 
         PageRequest pageRequest = PageRequest.of(0, 5, Sort.Direction.ASC, "prenom");
         Page<Employe> employeList2 = employeRepository.findByNomIgnoreCase("Andre", pageRequest);
+        System.out.println("Nombre de result tot : " + employeList2.getTotalElements());
+        System.out.println("Nombre pages tot : " + employeList2.getTotalPages());
+        System.out.println("Taille page : " + employeList2.getSize());
+        System.out.println("Trié par : " + employeList2.getSort().toString());
         for (Employe employe : employeList2){
             System.out.println(employe.toString());
         }
