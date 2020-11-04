@@ -3,14 +3,26 @@ package com.ipiecoles.java.java230.model;
 import com.ipiecoles.java.java230.exceptions.TechnicienException;
 import org.joda.time.LocalDate;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "manager")
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class Manager extends Employe {
 
+	//@Transient //=> signifie a spring de ne pas prendre en compte un attribut => celui qui suit
+	//private List<Technicien> techniciens;
+
+
+
+	@OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
 	private Set<Technicien> equipe = new HashSet();
+
+
 
 	public Manager(){
 
@@ -74,4 +86,9 @@ public class Manager extends Employe {
 	public String toString() {
 		return "Manager{} " + super.toString();
 	}
+
+
+
+
+
 }

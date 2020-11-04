@@ -1,7 +1,11 @@
 package com.ipiecoles.java.java230;
 
 import com.ipiecoles.java.java230.model.Employe;
+import com.ipiecoles.java.java230.model.Manager;
+import com.ipiecoles.java.java230.model.Technicien;
 import com.ipiecoles.java.java230.repository.EmployeRepository;
+import com.ipiecoles.java.java230.repository.ManagerRepository;
+import com.ipiecoles.java.java230.repository.TechnicienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Page;
@@ -17,6 +21,12 @@ public class MyRunner implements CommandLineRunner {
 
     @Autowired //pour pouvoir utiliser le repo (utilisation de Spring)
     private EmployeRepository employeRepository;
+
+    @Autowired //pour pouvoir utiliser le repo (utilisation de Spring)
+    private TechnicienRepository technicienRepository;
+
+    @Autowired //pour pouvoir utiliser le repo (utilisation de Spring)
+    private ManagerRepository managerRepository;
 
     @Override
     public void run(String... strings) throws Exception {
@@ -40,8 +50,8 @@ public class MyRunner implements CommandLineRunner {
 //            System.out.println(emp.toString());
 //        }
 
-
-        Employe e = employeRepository.findByMatricule("C00004");
+//mis en commentaire lors de l'exercice de mise en relation des table/model
+        /*Employe e = employeRepository.findByMatricule("C00004");
         if (e != null){
             System.out.println(e.toString());
         }
@@ -78,6 +88,31 @@ public class MyRunner implements CommandLineRunner {
             System.out.println(employe.toString());
         }
 
+        //Mise en place des relations = mapping
+        Iterable<Employe> employeIterable = employeRepository.findAll();
+
+        for (Employe employe : employeIterable){
+            //System.out.println(employe.toString());
+            System.out.println(employe.getPrimeAnnuelle());
+        }*/
+
+
+        /*Iterable<Technicien> technicienIterable = technicienRepository.findAll();
+        for (Technicien employe : technicienIterable){
+            System.out.println(employe.toString());
+            System.out.println(employe.getPrimeAnnuelle());
+            System.out.println(employe.getManager().getNom());
+        }*/
+
+//        Optional<Manager> managerIterable = managerRepository.findById(44L);
+//        for (Technicien technicien : managerIterable.get().getEquipe()){
+//            System.out.println(technicien.toString());
+//        }
+
+        Manager manager = managerRepository.findOneWithEquipeById(44L);
+        for(Technicien technicien : manager.getEquipe()){
+            System.out.println(technicien.toString());
+        }
 
     }
 
