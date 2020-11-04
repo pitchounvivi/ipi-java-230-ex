@@ -4,6 +4,9 @@ import com.ipiecoles.java.java230.model.Employe;
 import com.ipiecoles.java.java230.repository.EmployeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -54,6 +57,13 @@ public class MyRunner implements CommandLineRunner {
         for (Employe employe : employeList1){
             System.out.println(employe.toString());
         }
+
+        PageRequest pageRequest = PageRequest.of(0, 5, Sort.Direction.ASC, "prenom");
+        Page<Employe> employeList2 = employeRepository.findByNomIgnoreCase("Andre", pageRequest);
+        for (Employe employe : employeList2){
+            System.out.println(employe.toString());
+        }
+
 
 
     }
