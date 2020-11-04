@@ -37,14 +37,14 @@ public interface EmployeRepository extends PagingAndSortingRepository<Employe, L
     //ceci est une requête native (on utilise les tables)
     @Query(value = "SELECT * FROM Employe WHERE salaire > (SELECT avg(e2.salaire) FROM Employe e2)", nativeQuery = true)
     //@Query(value = "SELECT Employe e, AVG(*.salaire) as moyenne where e.salaire > moyenne", nativeQuery = true)// autre écriture
-    List<Employe> findEmployesPlusRiches(Double salaire);
+    List<Employe> findEmployePlusRiches();
 
 
     //ceci est unr requête native (on utilise la table)
     @Query(value = "SELECT e.* FROM Employe e "+
             "WHERE e.nom = :nom "+
             "OR WHERE e.prenom = :prenom", nativeQuery = true)
-        List<Employe> findEmployesByNomOuPrenom(@Param("nom") String nom,@Param("prenom") String prenom);
+        List<Employe> findByNomOuPrenom(@Param("nom") String nom,@Param("prenom") String prenom);
 
 
     //ceci est une requête JPA ou JPQL (on utilise la classe)

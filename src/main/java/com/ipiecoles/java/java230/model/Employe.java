@@ -5,11 +5,13 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "employe")
-public /*abstract*/ class Employe {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Employe {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,7 +49,7 @@ public /*abstract*/ class Employe {
 		return Entreprise.NB_CONGES_BASE;
 	}
 	
-	//public abstract Double getPrimeAnnuelle();
+	public abstract Double getPrimeAnnuelle();
 
 	public void augmenterSalaire(Double pourcentage) {
 		this.salaire = this.getSalaire() * (1 + pourcentage);
@@ -166,6 +168,10 @@ public /*abstract*/ class Employe {
 	public int hashCode() {
 		return Objects.hash(nom, prenom, matricule, dateEmbauche, salaire);
 	}
+
+
+//	@OneToMany(mappedBy = "employe")
+//	private List<Manager> manager;
 
 
 
