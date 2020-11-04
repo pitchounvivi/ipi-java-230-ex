@@ -47,17 +47,19 @@ public class MyRunner implements CommandLineRunner {
         }
         System.out.println("Employé non trouvé");
 
-
+        //
         List<Employe> employeList = employeRepository.findByNomAndPrenom("Barre", "Maxime");
         for (Employe employe : employeList){
             System.out.println(employe.toString());
         }
 
+        //
         List<Employe> employeList1 = employeRepository.findBySalaireIsGreaterThanOrderBySalaireDesc(2300.0);
         for (Employe employe : employeList1){
             System.out.println(employe.toString());
         }
 
+        //pagination
         PageRequest pageRequest = PageRequest.of(0, 5, Sort.Direction.ASC, "prenom");
         Page<Employe> employeList2 = employeRepository.findByNomIgnoreCase("Andre", pageRequest);
         System.out.println("Nombre de result tot : " + employeList2.getTotalElements());
@@ -68,6 +70,13 @@ public class MyRunner implements CommandLineRunner {
             System.out.println(employe.toString());
         }
 
+
+        //
+        //test d'une requête en JPA
+        List<Employe> employeList3 = employeRepository.findByNomOrPrenomAllIgnoreCase("JULIEN");
+        for (Employe employe : employeList3){
+            System.out.println(employe.toString());
+        }
 
 
     }
