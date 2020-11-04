@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -18,22 +19,40 @@ public class MyRunner implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         System.out.println("slt");
 
-        Long nbEmployes = employeRepository.count();
-        System.out.println("il y a " + nbEmployes + " dans la bdd");
+//        Long nbEmployes = employeRepository.count();
+//        System.out.println("il y a " + nbEmployes + " dans la bdd");
+//
+//        Optional<Employe> employe = employeRepository.findById(55L);
+//        if (employe.isEmpty()){
+//            System.out.println("Employé est inexistant");
+//        } else {
+//            Employe e = employe.get();
+//            e.setSalaire(e.getSalaire() + 200);
+//            e = employeRepository.save(e);
+//            System.out.println(e.toString());
+//        }
+//
+//
+//        for (Employe emp : employeRepository.findAll()){
+//            System.out.println(emp.toString());
+//        }
 
-        Optional<Employe> employe = employeRepository.findById(55L);
-        if (employe.isEmpty()){
-            System.out.println("Employé est inexistant");
-        } else {
-            Employe e = employe.get();
-            e.setSalaire(e.getSalaire() + 200);
-            e = employeRepository.save(e);
+
+        Employe e = employeRepository.findByMatricule("C00004");
+        if (e != null){
             System.out.println(e.toString());
         }
+        System.out.println("Employé non trouvé");
 
 
-        for (Employe emp : employeRepository.findAll()){
-            System.out.println(emp.toString());
+        List<Employe> employeList = employeRepository.findByNomAndPrenom("Barre", "Maxime");
+        for (Employe employe : employeList){
+            System.out.println(employe.toString());
+        }
+
+        List<Employe> employeList1 = employeRepository.findBySalaireIsGreaterThanOrderBySalaireDesc(2300.0);
+        for (Employe employe : employeList1){
+            System.out.println(employe.toString());
         }
 
 
